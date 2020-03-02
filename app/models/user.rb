@@ -20,4 +20,8 @@ class User < ApplicationRecord
   has_many :flights, :foreign_key => "passenger_id", :dependent => :destroy
 
   validates :phone_number, :presence => true
+
+  def flights
+    return Flight.where({:passenger_id => self.id})
+  end
 end

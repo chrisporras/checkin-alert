@@ -1,18 +1,8 @@
 <div class="row mb-3">
-  <div class="col-md-12">
-    <h1>
-      List of all flights
-    </h1>
-  </div>
-</div>
-
-<hr>
-
-<div class="row mb-3">
   <div class="col-md-8 offset-md-2">
-    <h2>
+    <h1>
       Add a new flight
-    </h2>
+    </h1>
 
     <form action="/insert_flight" method="post">
       <div class="form-group">
@@ -21,14 +11,6 @@
         </label>
 
         <input type="datetime-local" id="departure_time_box" name="query_departure_time" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="passenger_id_box">
-          Passenger
-        </label>
-
-        <input type="text" id="passenger_id_box" name="query_passenger_id" class="form-control">
       </div>
 
       <div class="form-group">
@@ -57,16 +39,10 @@
 
       <div class="form-group">
         <label for="url_box">
-          Url
+          Locator
         </label>
 
         <input type="text" id="url_box" name="query_url" class="form-control">
-      </div>
-
-      <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" class="custom-control-input" id="alert_sent_box" name="query_alert_sent" value="1">
-
-        <label class="custom-control-label" for="alert_sent_box">Alert sent</label>
       </div>
 
       <button class="btn btn-block btn-outline-secondary">
@@ -81,16 +57,9 @@
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           Departure time
-        </th>
-
-        <th>
-          Passenger
         </th>
 
         <th>
@@ -106,19 +75,11 @@
         </th>
 
         <th>
-          Url
+          Locator
         </th>
 
         <th>
           Alert sent
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
         </th>
 
         <th>
@@ -128,15 +89,7 @@
       <% @flights.each do |flight| %>
       <tr>
         <td>
-          <%= flight.id %>
-        </td>
-
-        <td>
-          <%= flight.departure_time %>
-        </td>
-
-        <td>
-          <%= flight.passenger_id %>
+          <%= flight.departure_time.strftime("%l:%M %b %e, %Y %Z ") %>
         </td>
 
         <td>
@@ -160,15 +113,8 @@
         </td>
 
         <td>
-          <%= time_ago_in_words(flight.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(flight.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/flights/<%= flight.id %>">
-            Show details
+          <a href="/delete_flight/<%= flight.id %>">
+            Delete flight
           </a>
         </td>
       </tr>
