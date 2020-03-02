@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
     if save_status == true
       session.store(:user_id,  @user.id)
+      @signed_in = true
    
       redirect_to("/", { :notice => "User account created successfully."})
     else
@@ -50,6 +51,8 @@ class UsersController < ApplicationController
   def destroy
     @current_user.destroy
     reset_session
+
+    @signed_in = false
     
     redirect_to("/", { :notice => "User account cancelled" })
   end

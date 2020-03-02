@@ -16,6 +16,32 @@
   </head>
 
   <body>
+    <nav>
+    <% if @signed_in %>
+    <ul>
+      <li>
+        <a href="/edit_user_profile">Edit profile</a>
+      </li>
+      <li>
+        <a href="/user_sign_out">Sign out</a>
+      </li>
+    </ul>  
+    <%else%>
+    <ul>
+      <li>
+        <a href="/user_sign_in">Sign in</a>
+      </li>
+      <li>
+        <a href="/user_sign_up">Sign up</a>
+      </li>
+    </ul> 
+    <%end%>
+    </nav>
+
+    <p><%= notice %></p>
+
+    <p><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>

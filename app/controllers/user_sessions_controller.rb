@@ -17,7 +17,8 @@ class UserSessionsController < ApplicationController
         redirect_to("/user_sign_in", { :alert => "Incorrect password." })
       else
         session.store(:user_id, user.id)
-      
+        @signed_in = true
+
         redirect_to("/", { :notice => "Signed in successfully." })
       end
     else
@@ -27,6 +28,7 @@ class UserSessionsController < ApplicationController
 
   def destroy_cookies
     reset_session
+    @signed_in = false
 
     redirect_to("/", { :notice => "Signed out successfully." })
   end
