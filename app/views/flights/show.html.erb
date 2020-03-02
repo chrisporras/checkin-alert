@@ -1,0 +1,161 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Flight #<%= @flight.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/flights" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_flight/<%= @flight.id %>" class="btn btn-block btn-outline-secondary">
+          Delete flight
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Departure time
+      </dt>
+      <dd>
+        <%= @flight.departure_time %>
+      </dd>
+
+      <dt>
+        Passenger
+      </dt>
+      <dd>
+        <%= @flight.passenger_id %>
+      </dd>
+
+      <dt>
+        Destination
+      </dt>
+      <dd>
+        <%= @flight.destination %>
+      </dd>
+
+      <dt>
+        Departure location
+      </dt>
+      <dd>
+        <%= @flight.departure_location %>
+      </dd>
+
+      <dt>
+        Confirmation number
+      </dt>
+      <dd>
+        <%= @flight.confirmation_number %>
+      </dd>
+
+      <dt>
+        Url
+      </dt>
+      <dd>
+        <%= @flight.url %>
+      </dd>
+
+      <dt>
+        Alert sent
+      </dt>
+      <dd>
+        <%= @flight.alert_sent %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@flight.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@flight.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h2>
+      Edit flight
+    </h2>
+
+    <form action="/modify_flight/<%= @flight.id %>"  method="post" >
+      <div class="form-group">
+        <label for="departure_time_box">
+          Departure time
+        </label>
+
+        <input type="datetime-local" id="departure_time_box" name="query_departure_time"
+          class="form-control" value="<%= @flight.departure_time %>">
+      </div>
+
+      <div class="form-group">
+        <label for="passenger_id_box">
+          Passenger
+        </label>
+
+        <input type="text" id="passenger_id_box" name="query_passenger_id" class="form-control" value="<%= @flight.passenger_id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="destination_box">
+          Destination
+        </label>
+
+        <input type="text" id="destination_box" name="query_destination" class="form-control" value="<%= @flight.destination %>">
+      </div>
+
+      <div class="form-group">
+        <label for="departure_location_box">
+          Departure location
+        </label>
+
+        <input type="text" id="departure_location_box" name="query_departure_location" class="form-control" value="<%= @flight.departure_location %>">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmation_number_box">
+          Confirmation number
+        </label>
+
+        <input type="text" id="confirmation_number_box" name="query_confirmation_number" class="form-control" value="<%= @flight.confirmation_number %>">
+      </div>
+
+      <div class="form-group">
+        <label for="url_box">
+          Url
+        </label>
+
+        <input type="text" id="url_box" name="query_url" class="form-control" value="<%= @flight.url %>">
+      </div>
+
+      <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" class="custom-control-input" id="alert_sent_box" name="query_alert_sent" value="1" <%= "checked" if @flight.alert_sent %>>
+
+        <label class="custom-control-label"
+          for="alert_sent_box">Alert sent</label>
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Update flight
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
