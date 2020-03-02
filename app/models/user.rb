@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :phone_number, :presence => true
 
   def flights
-    return Flight.where({:passenger_id => self.id}).order({ :created_at => :desc })
+    return Flight.where({:passenger_id => self.id})
   end
 
   def upcoming_flights

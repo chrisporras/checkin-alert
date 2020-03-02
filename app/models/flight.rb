@@ -22,11 +22,11 @@ class Flight < ApplicationRecord
   belongs_to :passenger, :class_name => "User"
 
   def upcoming
-    return self.where("departure_time > ?", Date.today)
+    return self.all.where("departure_time > ?", Date.today).order(departure_time: :asc)
   end
 
   def past
-    return self.where("departure_time < ?", Date.today)
+    return self.all.where("departure_time < ?", Date.today).order(departure_time: :desc)
   end
   
 end
