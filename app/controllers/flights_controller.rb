@@ -1,6 +1,10 @@
 class FlightsController < ApplicationController
   def index
-    @flights = Flight.all.order({ :created_at => :desc })
+    @flights = @current_user.flights
+
+    @upcoming_flights = @flights.where("departure_time > ?", Date.today).order(departure_time: :asc)
+
+    @past_flights = @flights.where("departure_time < ?", Date.today).order(departure_time: :desc)
 
     render({ :template => "flights/index.html.erb" })
   end
@@ -15,7 +19,7 @@ class FlightsController < ApplicationController
   def create
     @flight = Flight.new
     @flight.departure_time = params.fetch("query_departure_time")
-    @flight.passenger_id = params.fetch("query_passenger_id")
+    @flight.passenger_id = @current_user.id
     @flight.destination = params.fetch("query_destination")
     @flight.departure_location = params.fetch("query_departure_location")
     @flight.confirmation_number = params.fetch("query_confirmation_number")
@@ -24,9 +28,9 @@ class FlightsController < ApplicationController
 
     if @flight.valid?
       @flight.save
-      redirect_to("/flights", { :notice => "Flight created successfully." })
+      redirect_to("/", { :notice => "Flight created successfully." })
     else
-      redirect_to("/flights", { :notice => "Flight failed to create successfully." })
+      redirect_to("/", { :notice => "Flight failed to create successfully." })
     end
   end
 
@@ -35,7 +39,7 @@ class FlightsController < ApplicationController
     @flight = Flight.where({ :id => the_id }).at(0)
 
     @flight.departure_time = params.fetch("query_departure_time")
-    @flight.passenger_id = params.fetch("query_passenger_id")
+    @flight.passenger_id = @current_user.id
     @flight.destination = params.fetch("query_destination")
     @flight.departure_location = params.fetch("query_departure_location")
     @flight.confirmation_number = params.fetch("query_confirmation_number")
@@ -56,6 +60,6 @@ class FlightsController < ApplicationController
 
     @flight.destroy
 
-    redirect_to("/flights", { :notice => "Flight deleted successfully."} )
+    redirect_to("/", { :notice => "Flight deleted successfully."} )
   end
 end

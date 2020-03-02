@@ -20,5 +20,13 @@ class Flight < ApplicationRecord
   validates :departure_time, :presence => true
 
   belongs_to :passenger, :class_name => "User"
+
+  def upcoming
+    return self.where("departure_time > ?", Date.today)
+  end
+
+  def past
+    return self.where("departure_time < ?", Date.today)
+  end
   
 end

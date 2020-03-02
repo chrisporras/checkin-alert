@@ -53,6 +53,9 @@
 </div>
 
 <hr>
+
+<h3>Upcoming flights</h3>
+
 <div class="row mb-3">
   <div class="col-md-12">
     <table class="table">
@@ -86,10 +89,10 @@
         </th>
       </tr>
 
-      <% @flights.each do |flight| %>
+      <% @upcoming_flights.each do |flight| %>
       <tr>
         <td>
-          <%= flight.departure_time.strftime("%l:%M %b %e, %Y %Z ") %>
+          <%= flight.departure_time.strftime("%l:%M %p %b %e, %Y %Z") %>
         </td>
 
         <td>
@@ -124,3 +127,75 @@
 </div>
 
 <hr>
+
+<h3>Past flights</h3>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+
+        <th>
+          Departure time
+        </th>
+
+        <th>
+          Destination
+        </th>
+
+        <th>
+          Departure location
+        </th>
+
+        <th>
+          Confirmation number
+        </th>
+
+        <th>
+          Locator
+        </th>
+
+        <th>
+          Alert sent
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @past_flights.each do |flight| %>
+      <tr>
+        <td>
+          <%= flight.departure_time.strftime("%l:%M %p %b %e, %Y %Z") %>
+        </td>
+
+        <td>
+          <%= flight.destination %>
+        </td>
+
+        <td>
+          <%= flight.departure_location %>
+        </td>
+
+        <td>
+          <%= flight.confirmation_number %>
+        </td>
+
+        <td>
+          <%= flight.url %>
+        </td>
+
+        <td>
+          <%= flight.alert_sent %>
+        </td>
+
+        <td>
+          <a href="/delete_flight/<%= flight.id %>">
+            Delete flight
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
