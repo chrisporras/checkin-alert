@@ -7,7 +7,7 @@ class CreateFlights < ActiveRecord::Migration[6.0]
       t.string :departure_location
       t.string :confirmation_number
       t.string :url
-      t.boolean :alert_sent {:default => false}
+      t.boolean :alert_sent , {:default => false}
 
       t.timestamps
     end
